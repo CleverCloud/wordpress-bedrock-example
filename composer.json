@@ -39,7 +39,7 @@
     "roots/wp-password-bcrypt": "1.2.0",
     "wp-cli/wp-cli-bundle": "2.11.*",
     "humanmade/s3-uploads": "~3.0",
-    "wpackagist-plugin/mailgun": "2.1.2",
+    "wpackagist-plugin/mailgun": "2.1.3",
     "wpackagist-theme/twentytwentytwo":"^1.2"
   },
   "require-dev": {
