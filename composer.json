@@ -37,7 +37,7 @@
     "roots/wordpress": "6.8",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.2.0",
-    "wp-cli/wp-cli-bundle": "2.11.*",
+    "wp-cli/wp-cli-bundle": "2.12.*",
     "humanmade/s3-uploads": "~3.0",
     "wpackagist-plugin/mailgun": "2.1.7",
     "wpackagist-theme/twentytwentytwo":"^1.2"
