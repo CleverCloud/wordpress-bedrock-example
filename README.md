@@ -8,19 +8,19 @@ This is a WordPress application using [Bedrock](https://roots.io/bedrock/) ([Git
 
 This project is based on Bedrock 1.30.0 with the following Clever Cloud-specific modifications:
 
-- `config/application.php` — maps Clever Cloud's `MYSQL_ADDON_*` and `CELLAR_ADDON_*` environment variables
-- `composer.json` — includes `humanmade/s3-uploads` for S3 media storage and `wpackagist-plugin/mailgun` for email delivery
-- `web/app/mu-plugins/s3-uploads-filter.php` — configures a Cellar endpoint instead of AWS
-- `web/.htaccess` — included and tracked (Bedrock gitignores it by default)
-- `clevercloud/php.json` — sets the webroot to `/web`
-- `setup-cellar.sh` — creates the S3 bucket on Cellar (used as a post-build hook)
+- `config/application.php` – maps Clever Cloud's `MYSQL_ADDON_*` and `CELLAR_ADDON_*` environment variables
+- `composer.json` – includes `humanmade/s3-uploads` for S3 media storage and `wpackagist-plugin/mailgun` for email delivery
+- `web/app/mu-plugins/s3-uploads-filter.php` – configures a Cellar endpoint instead of AWS
+- `web/.htaccess` – included and tracked (Bedrock gitignores it by default)
+- `clevercloud/php.json` – sets the webroot to `/web` (PHP runtime only; on FrankenPHP, see [Deploying on FrankenPHP](#deploying-on-frankenphp))
+- `setup-cellar.sh` – creates the S3 bucket on Cellar (used as a post-build hook)
 
 ## Technology Stack
 
-- [WordPress](https://wordpress.org/) 6.9 — Content management system
-- [Bedrock](https://roots.io/bedrock/) 1.30 — Modern WordPress boilerplate
-- [Composer](https://getcomposer.org/) — Dependency manager for PHP
-- [Cellar](https://www.clever-cloud.com/product/cellar-s3/) — S3-compatible object storage for media files
+- [WordPress](https://wordpress.org/) 6.9 – Content management system
+- [Bedrock](https://roots.io/bedrock/) 1.30 – Modern WordPress boilerplate
+- [Composer](https://getcomposer.org/) – Dependency manager for PHP
+- [Cellar](https://www.clever-cloud.com/product/cellar-s3/) – S3-compatible object storage for media files
 
 ## Prerequisites
 
@@ -77,7 +77,7 @@ Add the following environment variables in the Clever Cloud console (expert mode
 | `WP_ENV` | `production` | WordPress environment |
 | `WP_HOME` | `https://your-domain.tld` | Your site URL |
 | `WP_SITEURL` | `https://your-domain.tld/wp` | WordPress core URL |
-| `AUTH_KEY` | *(generated)* | Authentication salts — generate all 8 keys at https://cdn.roots.io/salts.html |
+| `AUTH_KEY` | *(generated)* | Authentication salts – generate all 8 keys at https://cdn.roots.io/salts.html |
 | `SECURE_AUTH_KEY` | *(generated)* | |
 | `LOGGED_IN_KEY` | *(generated)* | |
 | `NONCE_KEY` | *(generated)* | |
@@ -185,6 +185,26 @@ clever deploy
 
 Once deployed, access your site at `https://<YOUR_DOMAIN_NAME>/` and complete the WordPress installation.
 
+## Deploying on FrankenPHP
+
+This example also runs on Clever Cloud's [FrankenPHP runtime](https://www.clever-cloud.com/developers/doc/deploy/applications/frankenphp/), a PHP server built on Caddy. The steps are the same as above, with two differences:
+
+1. **Choose FrankenPHP as the runtime** instead of PHP, in the console or with the CLI:
+
+   ```bash
+   clever create --type frankenphp <YOUR_APP_NAME>
+   ```
+
+2. **Set the webroot with an environment variable.** FrankenPHP ignores `clevercloud/php.json`, so you must set `CC_WEBROOT` yourself:
+
+   ```bash
+   clever env set CC_WEBROOT /web
+   ```
+
+   Without it, FrankenPHP serves the project root and every page fails with an error like `Failed opening required '.../wp/wp-admin/install.php'`, because WordPress lives in `web/wp/`.
+
+You don't need to translate `web/.htaccess` into a Caddyfile: FrankenPHP already sends requests for anything that isn't an existing file or directory to `index.php`, which is all the WordPress rewrite rules do. If you want a custom Caddyfile later, load it with `CC_RUN_COMMAND="frankenphp run --config /path/to/Caddyfile"`.
+
 ## Sending Emails
 
 By default, this WordPress installation cannot send emails. You can either:
@@ -233,4 +253,5 @@ This project is based on [Bedrock 1.30.0](https://github.com/roots/bedrock/relea
 - [WordPress Documentation](https://developer.wordpress.org/)
 - [Composer Documentation](https://getcomposer.org/doc/)
 - [Clever Cloud PHP Documentation](https://www.clever-cloud.com/developers/doc/applications/php/)
+- [Clever Cloud FrankenPHP Documentation](https://www.clever-cloud.com/developers/doc/deploy/applications/frankenphp/)
 - [Clever Cloud Cellar Documentation](https://www.clever-cloud.com/developers/doc/addons/cellar/)
