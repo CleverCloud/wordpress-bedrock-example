@@ -25,34 +25,26 @@
   },
   "repositories": [
     {
-      "name": "wp-composer",
+      "name": "wp-packages",
       "type": "composer",
-      "url": "https://repo.wp-composer.com",
-      "only": [
-        "wp-plugin/*",
-        "wp-theme/*"
-      ]
-    },
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
+      "url": "https://repo.wp-packages.org"
     }
   ],
   "require": {
     "php": ">=8.3",
-    "composer/installers": "^2.2",
+    "composer/installers": "^2.0",
     "humanmade/s3-uploads": "^3.0",
-    "oscarotero/env": "^2.1",
+    "oscarotero/env": "^2.0",
     "roots/bedrock-autoloader": "^1.0",
     "roots/bedrock-disallow-indexing": "^2.0",
-    "roots/wordpress": "6.9.4",
-    "roots/wp-config": "1.0.0",
-    "vlucas/phpdotenv": "^5.5",
-    "wpackagist-plugin/mailgun": "^1.9",
+    "roots/wordpress": "7.1.2",
+    "roots/wp-config": "^1.0",
+    "vlucas/phpdotenv": "^5.0",
+    "wp-plugin/mailgun": "^2.2",
     "wp-theme/twentytwentyfive": "^1.0"
   },
   "require-dev": {
-    "laravel/pint": "^1.27",
+    "laravel/pint": "^1.0",
     "pestphp/pest": "^4.0"
   },
   "config": {

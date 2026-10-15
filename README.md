@@ -6,10 +6,10 @@ This is a WordPress application using [Bedrock](https://roots.io/bedrock/) ([Git
 
 ## About the Application
 
-This project is based on Bedrock 1.30.0 with the following Clever Cloud-specific modifications:
+This project is based on Bedrock 1.31.6 with the following Clever Cloud-specific modifications:
 
 - `config/application.php` – maps Clever Cloud's `MYSQL_ADDON_*` and `CELLAR_ADDON_*` environment variables
-- `composer.json` – includes `humanmade/s3-uploads` for S3 media storage and `wpackagist-plugin/mailgun` for email delivery
+- `composer.json` – includes `humanmade/s3-uploads` for S3 media storage and `wp-plugin/mailgun` for email delivery
 - `web/app/mu-plugins/s3-uploads-filter.php` – configures a Cellar endpoint instead of AWS
 - `web/.htaccess` – included and tracked (Bedrock gitignores it by default)
 - `clevercloud/php.json` – sets the webroot to `/web` (PHP runtime only; on FrankenPHP, see [Deploying on FrankenPHP](#deploying-on-frankenphp))
@@ -17,8 +17,8 @@ This project is based on Bedrock 1.30.0 with the following Clever Cloud-specific
 
 ## Technology Stack
 
-- [WordPress](https://wordpress.org/) 6.9 – Content management system
-- [Bedrock](https://roots.io/bedrock/) 1.30 – Modern WordPress boilerplate
+- [WordPress](https://wordpress.org/) 7.1 – Content management system
+- [Bedrock](https://roots.io/bedrock/) 1.31 – Modern WordPress boilerplate
 - [Composer](https://getcomposer.org/) – Dependency manager for PHP
 - [Cellar](https://www.clever-cloud.com/product/cellar-s3/) – S3-compatible object storage for media files
 
@@ -214,10 +214,10 @@ By default, this WordPress installation cannot send emails. You can either:
 
 ## Installing Themes and Plugins
 
-Themes and plugins are managed via Composer and [WordPress Packagist](https://wpackagist.org). To install a new plugin or theme, add it to `composer.json` and commit:
+Themes and plugins are managed via Composer and [WP Packages](https://wp-packages.org), the repository upstream Bedrock uses. To install a new plugin or theme, add it to `composer.json` and commit:
 
 ```bash
-composer require wpackagist-plugin/plugin-name
+composer require wp-plugin/plugin-name
 git add composer.json composer.lock
 git commit -m "Add plugin-name"
 git push clever master
@@ -227,7 +227,7 @@ git push clever master
 
 ## Keeping WordPress Updated
 
-WordPress updates are handled through Composer. Update the version in `composer.json`, run `composer update`, commit, and deploy. If a database migration is needed, WordPress will prompt you when logged in as administrator.
+WordPress updates are handled through Composer. Bedrock disables WordPress automatic updates, so security releases only reach your site when you bump the pinned `roots/wordpress` version yourself. Update the version in `composer.json`, run `composer update`, commit, and deploy. If a database migration is needed, WordPress will prompt you when logged in as administrator.
 
 ## Monitoring Your Application
 
@@ -238,10 +238,10 @@ Once deployed, you can monitor your application through:
 
 ## Differences with Bedrock
 
-This project is based on [Bedrock 1.30.0](https://github.com/roots/bedrock/releases/tag/1.30.0) with the following changes:
+This project is based on [Bedrock 1.31.6](https://github.com/roots/bedrock/releases/tag/1.31.6) with the following changes:
 
 - `config/application.php` uses Clever Cloud's `MYSQL_ADDON_*` variables for database configuration and `CELLAR_ADDON_*` variables for S3 storage
-- `composer.json` includes `humanmade/s3-uploads` and `wpackagist-plugin/mailgun` as additional dependencies, and the wpackagist.org repository
+- `composer.json` includes `humanmade/s3-uploads` and `wp-plugin/mailgun` as additional dependencies
 - `web/app/mu-plugins/s3-uploads-filter.php` configures the S3 client to use a Cellar endpoint
 - `web/.htaccess` is tracked in the repository (Bedrock gitignores it by default)
 - `clevercloud/php.json` configures the webroot for Clever Cloud's build system
