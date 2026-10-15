@@ -220,12 +220,12 @@ Themes and plugins are managed via Composer and [WP Packages](https://wp-package
 
 ```bash
 composer require wp-plugin/plugin-name
-git add composer.json composer.lock
+git add composer.json
 git commit -m "Add plugin-name"
 git push clever master
 ```
 
-> **Note:** Pay attention to how you define your [dependencies with Composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies). The stricter way is to locally run `composer update` and commit your `composer.lock` file.
+> **Note:** Pay attention to how you define your [dependencies with Composer](https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies). Like upstream Bedrock, this example does not commit `composer.lock`, so each deploy resolves dependencies from `composer.json` (WordPress itself is pinned to an exact version). For fully reproducible deploys in your own project, remove `composer.lock` from `.gitignore`, run `composer update` locally and commit the lock file.
 
 ## Keeping WordPress Updated
 

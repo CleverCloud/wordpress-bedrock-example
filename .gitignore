@@ -36,3 +36,6 @@ wp-cli.local.yml
 
 # s3cmd config with Cellar credentials (older setup-cellar.sh wrote it here)
 .s3cfg
+
+# Not committed, like upstream Bedrock: deploys resolve dependencies from composer.json
+composer.lock
