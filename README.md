@@ -148,8 +148,10 @@ clever domain add <YOUR_DOMAIN_NAME>
 
 # Set required environment variables
 clever env set WP_ENV production
-clever env set WP_HOME "https://$(clever domain | tr -d ' ')"
-clever env set WP_SITEURL "https://$(clever domain | tr -d ' ')wp"
+# `clever domain` prints the domain with a trailing slash, strip it
+DOMAIN=$(clever domain | head -n 1 | tr -d ' /')
+clever env set WP_HOME "https://$DOMAIN"
+clever env set WP_SITEURL "https://$DOMAIN/wp"
 
 
 
@@ -245,7 +247,7 @@ This project is based on [Bedrock 1.31.7](https://github.com/roots/bedrock/relea
 - `web/app/mu-plugins/s3-uploads-filter.php` configures the S3 client to use a Cellar endpoint
 - `web/.htaccess` is tracked in the repository (Bedrock gitignores it by default)
 - `clevercloud/php.json` configures the webroot for Clever Cloud's build system
-- `setup-cellar.sh` creates the S3 bucket on Cellar via `s3cmd` (can be used as `CC_POST_BUILD_HOOK`)
+- `setup-cellar.sh` creates the S3 bucket on Cellar via `s3cmd`, skipping it if it already exists (can be used as `CC_POST_BUILD_HOOK`); its `s3cmd` config goes to a temporary file, so no credentials are written to the repository
 
 ## Additional Resources
 

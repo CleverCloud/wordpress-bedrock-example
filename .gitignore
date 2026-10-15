@@ -33,3 +33,6 @@ phpunit.xml
 wp-cli.local.yml
 
 .clever.json
+
+# s3cmd config with Cellar credentials (older setup-cellar.sh wrote it here)
+.s3cfg
