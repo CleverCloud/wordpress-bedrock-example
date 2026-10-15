@@ -6,7 +6,7 @@ This is a WordPress application using [Bedrock](https://roots.io/bedrock/) ([Git
 
 ## About the Application
 
-This project is based on Bedrock 1.31.6 with the following Clever Cloud-specific modifications:
+This project is based on Bedrock 1.31.7 with the following Clever Cloud-specific modifications:
 
 - `config/application.php` – maps Clever Cloud's `MYSQL_ADDON_*` and `CELLAR_ADDON_*` environment variables
 - `composer.json` – includes `humanmade/s3-uploads` for S3 media storage and `wp-plugin/mailgun` for email delivery
@@ -238,7 +238,7 @@ Once deployed, you can monitor your application through:
 
 ## Differences with Bedrock
 
-This project is based on [Bedrock 1.31.6](https://github.com/roots/bedrock/releases/tag/1.31.6) with the following changes:
+This project is based on [Bedrock 1.31.7](https://github.com/roots/bedrock/releases/tag/1.31.7) with the following changes:
 
 - `config/application.php` uses Clever Cloud's `MYSQL_ADDON_*` variables for database configuration and `CELLAR_ADDON_*` variables for S3 storage
 - `composer.json` includes `humanmade/s3-uploads` and `wp-plugin/mailgun` as additional dependencies
